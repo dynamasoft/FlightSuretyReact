@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import useStyles from './styles';
 import memories from './images/memories.png';
-import { } from './components/Web3/Web3client';
+import { } from './components/Web3client';
 
 
 
@@ -11,10 +11,9 @@ const App = () => {
   debugger;
   //init();
 
-const payToParticipate = () => {
+const payToParticipate = () => {  
   
   debugger;
-
 
 }
 

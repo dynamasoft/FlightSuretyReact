@@ -22096,9 +22096,17 @@
     "name": "solc",
     "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x75AB9eaD0C961f5a601F9c910E95ECB691c2DEcD",
+      "transactionHash": "0x6b1bfb292fd6be6fd1c537fed898ff2d5026cf1205300d96910c86e89913f4c5"
+    }
+  },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-14T19:38:31.350Z",
+  "updatedAt": "2021-10-14T19:38:36.438Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {
       "getPendingPaymentAmount(address)": {

@@ -1,6 +1,6 @@
-import FlightSuretyApp from  "../../config/FlightSuretyApp.json";
-import FlightSuretyData from "../../config/FlightSuretyData.json";
-import Config from "../../config/config.json";
+import FlightSuretyApp from  "../config/FlightSuretyApp.json";
+import FlightSuretyData from "../config/FlightSuretyData.json";
+import Config from "../config/config.json";
 import Web3 from "web3";
 import Web3Util from "web3-utils";
 
@@ -34,6 +34,7 @@ export default class Contract {
   }
 
   initialize(callback) {
+    debugger;
     this.web3.eth.getAccounts((error, accts) => {
       this.owner = accts[0];
 

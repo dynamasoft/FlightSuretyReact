@@ -22,14 +22,14 @@ module.exports = function(deployer, network, accounts) {
       fs.writeFileSync(__dirname + '/../../client/src/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
       fs.writeFileSync(__dirname + '/../../server/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
      
-      fs.copyFile(__dirname + '/../build/contracts/flightsuretyapp.json', __dirname + '/../../client/src/config/flightsuretyapp.json',(err) =>
+      fs.copyFile(__dirname + '/../build/contracts/FlightSuretyApp.json', __dirname + '/../../client/src/config/FlightSuretyApp.json',(err) =>
       {
         if (err) {
           console.log("Error Found:", err);
         }
       });
 
-      fs.copyFile(__dirname + '/../build/contracts/flightsuretydata.json', __dirname + '/../../client/src/config/flightsuretydata.json',(err) =>
+      fs.copyFile(__dirname + '/../build/contracts/FlightSuretyData.json', __dirname + '/../../client/src/config/FlightSuretyData.json',(err) =>
       {
         if (err) {
           console.log("Error Found:", err);
