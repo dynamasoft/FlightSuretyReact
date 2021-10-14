@@ -1,8 +1,11 @@
 const FlightSuretyApp = artifacts.require("FlightSuretyApp");
 const FlightSuretyData = artifacts.require("FlightSuretyData");
+const { Console } = require('console');
 const fs = require('fs');
 
 module.exports = function(deployer, network, accounts) {
+  //console.log("dirname:" + __dirname+ '/../../client/src/config/config.json');
+  //return;
   let firstAirlineName = "Swiss International Airlines";
   let firstAirlineAddress = accounts[1];
   // Airline Contract Initialization: First airline is registered when contract is deployed
@@ -15,8 +18,31 @@ module.exports = function(deployer, network, accounts) {
           appAddress: FlightSuretyApp.address
         }
       }
-      fs.writeFileSync(__dirname + '/../../client/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
+      debugger;
+      fs.writeFileSync(__dirname + '/../../client/src/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
       fs.writeFileSync(__dirname + '/../../server/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
+     
+      fs.copyFile(__dirname + '/../build/contracts/flightsuretyapp.json', __dirname + '/../../client/src/config/flightsuretyapp.json',(err) =>
+      {
+        if (err) {
+          console.log("Error Found:", err);
+        }
+      });
+
+      fs.copyFile(__dirname + '/../build/contracts/flightsuretydata.json', __dirname + '/../../client/src/config/flightsuretydata.json',(err) =>
+      {
+        if (err) {
+          console.log("Error Found:", err);
+        }
+      });
+      
+
+
+
+      
+
+
+
     });
   });
 }

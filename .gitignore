@@ -2,5 +2,4 @@
 server/node_modules/
 client/node_modules/
 client/build/
-client/public/
 smart-contract/node_modules/
