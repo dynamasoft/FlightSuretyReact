@@ -6,8 +6,7 @@ import Web3Util from "web3-utils";
 
 export default class Contract {
 
-  constructor(network, callback) {
-    debugger;
+  constructor(network, callback) {    
     this.AIRLINE_FEE = Web3Util.toWei("10", "ether");
     this.INSURANCE_FEE = Web3Util.toWei("1", "ether");
     this.TIMESTAMP = Math.floor(Date.now() / 1000);
@@ -25,7 +24,7 @@ export default class Contract {
     this.initialize(callback);
     this.owner = null;
     this.firstAirline = null;
-    this.airlines = [];
+    this.airlines= [];
     this.passengers = [];
 
     this.flight = "ABC";
@@ -34,14 +33,14 @@ export default class Contract {
   }
 
   initialize(callback) {
-    debugger;
+    
     this.web3.eth.getAccounts((error, accts) => {
       this.owner = accts[0];
 
       let counter = 1;
 
       while (this.airlines.length < 5) {
-        this.airlines.push(accts[counter++]);
+        this.airlines.push(accts[counter++], );
       }
 
       while (this.passengers.length < 5) {
@@ -53,6 +52,11 @@ export default class Contract {
         .authorizeContract(this.config.appAddress)
         .send({ from: this.owner });
     });
+  }
+
+  getAirlines()
+  {    
+    return this.airlines;
   }
 
   isOperational(callback) {
@@ -98,7 +102,7 @@ export default class Contract {
       }
     } catch (e) {
       
-      callback(e);
+      callback(e.message);
     }
   }
 
@@ -131,8 +135,8 @@ export default class Contract {
         });
 
       
-      result = await self.flightSuretyData.methods
-        .isFlight(this.firstAirline, this.flight, this.TIMESTAMP)
+      result = await self.flightSuretyApp.methods
+        .isRegisteredFlight(this.firstAirline, this.flight, this.TIMESTAMP)
         .call();
       
       if (result) {
@@ -142,8 +146,33 @@ export default class Contract {
       }
     } catch (e) {
       
-      callback(e);
+      callback(e.message);
     }
+  }
+
+  flightStatusInfo(callback)
+  {
+    let self = this;
+    debugger;
+    self.flightSuretyApp.events.FlightStatusInfo({}, function(error, event) {
+      debugger;
+        if(error) {
+            console.log(error);
+        } else {
+            //console.log(event.returnValues);
+            callback(event.returnValues);
+        }
+    });
+
+    self.flightSuretyApp.events.OracleReport({}, function(error, event) {
+      debugger;
+        if(error) {
+            console.log(error);
+        } else {
+            //console.log(event.returnValues);
+            callback(event.returnValues);
+        }
+    })
   }
 
   async purchaseInsurance(callback) {
@@ -165,11 +194,12 @@ export default class Contract {
     } 
     catch (e) {
       
-      callback(e);
+      callback(e.message);
     }
   }
 
   fetchFlightStatus(flight, callback) {
+    debugger;
     let self = this;
     let payload = {
       airline: self.airlines[0],
@@ -179,14 +209,22 @@ export default class Contract {
     self.flightSuretyApp.methods
       .fetchFlightStatus(payload.airline, payload.flight, payload.timestamp)
       .send({ from: self.owner }, (error, result) => {
-        callback(error, payload);
+        debugger;
+        if(error == null)
+        {
+          callback("oracle callback has been dispatched")
+        }
+        else
+        {
+          callback(error.message);
+        }
+       
       });
   }
   
   async pendingPaymentAmount(callback) {
     
-    try {
-      debugger;
+    try {      
       let self = this;
       var result = await self.flightSuretyApp.methods
         .getPendingPaymentAmount(this.passengers[0]);
@@ -194,31 +232,30 @@ export default class Contract {
 
     } 
     catch (e) {      
-      callback(e);
+      callback(e.message);
     }
   }
   
   async getPassengerBalance(callback) {    
     try {
-      debugger;      
+      
       var result = this.web3.eth.getBalance(this.passengers[0]);
       callback("passenger 1 balance: " + result);
 
     } 
     catch (e) {      
-      callback(e);
+      callback(e.message);
     }
   }  
   
   async pay(callback) {    
-    try {
-      debugger;      
+    try {      
       var result = this.web3.eth.pay({from: this.passengers[0], gasPrice: 0});
       callback("passenger 1 balance: " + result);
 
     } 
     catch (e) {      
-      callback(e);
+      callback(e.message);
     }
   }
 }

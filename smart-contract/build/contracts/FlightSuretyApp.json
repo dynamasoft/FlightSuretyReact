@@ -32343,12 +32343,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x28Dd31Ceab456d0674f2FEdc5327f1a8F781b71A",
-      "transactionHash": "0xb50b6307664067674c5425e4dad2327a5fa2a2c8e0501e7c68b4067b9ab0ac61"
+      "address": "0xC6259B32b06b48A5cc24956547030c4C6311a297",
+      "transactionHash": "0x5106b717413cdba76fe09f8847509c22848d5e4656eb5d5ab2e1e52527bef97a"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-14T19:38:36.422Z",
+  "updatedAt": "2021-10-15T21:44:49.784Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

@@ -105,6 +105,7 @@ web3.eth.getAccounts((error, acct) => {
 debugger;
 flightSuretyApp.events.OracleRequest({fromBlock: 0}, function (error, event) 
 {  
+  debugger;
     let index = event.returnValues.index;
     let airline = event.returnValues.airline;
     let flight = event.returnValues.flight;

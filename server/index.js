@@ -2,10 +2,10 @@
 import http from 'http'
 import app from './web3server.js'
 
-debugger;
+
 const server = http.createServer(app)
 let currentApp = app
-server.listen(3000)
+server.listen(5000)
 
 // if (module.hot) {
 //     debugger;

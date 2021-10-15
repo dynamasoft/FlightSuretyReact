@@ -18,7 +18,7 @@ module.exports = function(deployer, network, accounts) {
           appAddress: FlightSuretyApp.address
         }
       }
-      debugger;
+      
       fs.writeFileSync(__dirname + '/../../client/src/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
       fs.writeFileSync(__dirname + '/../../server/config/config.json',JSON.stringify(config, null, '\t'), 'utf-8');
      
