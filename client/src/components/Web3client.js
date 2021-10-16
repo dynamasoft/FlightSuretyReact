@@ -231,6 +231,8 @@ export default class Contract {
         .getPendingPaymentAmount(this.passengers[0]).call();
         callback("Pending payment amount: " + result);
 
+        debugger;
+       result = await self.flightSuretyApp.methods.getPendingPaymentAmount(this.passengers[0]);
     } 
     catch (e) {      
       callback(e.message);
@@ -254,7 +256,7 @@ export default class Contract {
       debugger;
       let self = this;
       await self.flightSuretyApp.methods.refund()
-      .send(this.passengers[0]);
+      .send({from:this.passengers[0]});
     } 
     catch (e) {      
       callback(e.message);

@@ -17,7 +17,7 @@ contract("Oracles", async (accounts) => {
   };
   let flight2 = {
     airline: airline2,
-    flight: "5678",
+    flight: "ABC",
     from: "CCC",
     to: "DDD",
     timestamp: TIMESTAMP,
@@ -53,8 +53,10 @@ contract("Oracles", async (accounts) => {
   describe("(oracles) test oracles functionality", function ()   
   {
 
-    it("(oracles) -  can register oracles", async () => {
+    it("(oracles) -  can register oracles", async () => 
+    {
       let fee = await config.flightSuretyApp.REGISTRATION_FEE.call();
+    
       for (let i = 1; i < ORACLES_MAX; i++) 
       {
         await config.flightSuretyApp.registerOracle({
@@ -68,7 +70,7 @@ contract("Oracles", async (accounts) => {
 
       for (let i = 1; i < ORACLES_MAX; i++) 
       {
-        let result = await config.flightSuretyApp.getMyIndexes.call({from: accounts[i + OFFSET],});
+        let result = await config.flightSuretyApp.getMyIndexes.call({from: accounts[i + OFFSET]});
         console.log('Registered Oracle Indexes:' + result[0] + ' ' +  result[1] + ' ' + result[2]);
       }
     });
@@ -102,7 +104,9 @@ contract("Oracles", async (accounts) => {
               STATUS_CODE_LATE_AIRLINE,
               { from: accounts[a + OFFSET] }
             );
-          } catch (e) {}
+          } catch (e) {
+            console.log(e);
+          }
         }
       }
     });  

@@ -305,16 +305,12 @@ contract FlightSuretyApp {
     /**
      * @dev Called after oracle has updated flight status
      */
-    function processFlightStatus(
-        address airline,
-        string memory flight,
-        uint256 timestamp,
+    function processFlightStatus(        
+        bytes32 key,
         uint8 statusCode
     ) internal requireIsOperational {
         flightSuretyData.processFlightStatus(
-            airline,
-            flight,
-            timestamp,
+            key,
             statusCode
         );
     }
@@ -328,9 +324,8 @@ contract FlightSuretyApp {
         uint8 index = getRandomIndex(msg.sender);
 
         // Generate a unique key for storing the request
-        bytes32 key = keccak256(
-            abi.encodePacked(index, airline, flight, timestamp)
-        );
+        bytes32 key = keccak256(abi.encodePacked(index, airline, flight, timestamp));
+
         oracleResponses[key] = ResponseInfo({
             requester: msg.sender,
             isOpen: true
@@ -447,11 +442,11 @@ contract FlightSuretyApp {
         oracleResponses[key].responses[statusCode].push(msg.sender);        
         emit OracleReport(airline, flight, timestamp, statusCode);
 
-        if (
-            oracleResponses[key].responses[statusCode].length >= MIN_RESPONSES
-        ) {
-            emit FlightStatusInfo(airline, flight, timestamp, statusCode);            
-            processFlightStatus(airline, flight, timestamp, statusCode);
+        if (oracleResponses[key].responses[statusCode].length >= 1) 
+        {
+            emit FlightStatusInfo(airline, flight, timestamp, statusCode);
+            bytes32 flightKey = getFlightKey(msg.sender, flight, timestamp);                        
+            processFlightStatus(key,statusCode);
         }
     }
 
@@ -517,12 +512,7 @@ interface FlightSuretyData {
 
     function payAirline(address addr) external payable;
 
-    function processFlightStatus(
-        address airline,
-        string  flight,
-        uint256 timestamp,
-        uint8 statusCode
-    ) external;
+    function processFlightStatus(bytes32 flightKey, uint8 statusCode) external;   
 
     function registerFlight(
         address airline,

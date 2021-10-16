@@ -69,26 +69,27 @@ function registerOracle()
         debugger;
         console.log(error);
       } 
+      else
+      {
+        registerOracleIndex(accounts[a]);
+      }
     });
   }
 }
 
-function getOracleIndexes()
-{
-  for(let a=OFFSET; a<ORACLES_MAX + OFFSET; a++) 
-  {   
-        flightSuretyApp.methods.getMyIndexes().call({from: accounts[a]}, (error, result) => 
+function registerOracleIndex(account)
+{  
+        flightSuretyApp.methods.getMyIndexes().call({from: account}, (error, result) => 
         {
           if (error) {
             debugger;
           }
           else {
-            let oracle = {address: accounts[a], index: result};
-            console.log(`Oracle: ${JSON.stringify(oracle)}`);
+            let oracle = {address: account, index: result};
+            console.log(`Oracle indexes: ${JSON.stringify(oracle)}`);
             oracles.push(oracle);
-          }
-        });
-  }
+          }        
+    });
 }
 
 web3.eth.getAccounts((error, acct) => {
@@ -97,8 +98,6 @@ web3.eth.getAccounts((error, acct) => {
   accounts = acct;
   authorizeContract();
   registerOracle();
-  getOracleIndexes();
-
 });
 
 
@@ -112,13 +111,15 @@ flightSuretyApp.events.OracleRequest({fromBlock: 0}, function (error, event)
     let timestamp = event.returnValues.timestamp;
     let statusCode = randomize();
 
+    console.log(`Received request ==> index: ${index} - airline: ${airline} - flight: ${flight} - statusCode: ${statusCode}`);
+
     for(let a=0; a<oracles.length; a++) 
     {
       if(oracles[a].index.includes(index)) 
       {
         flightSuretyApp.methods.submitOracleResponse(index, airline, flight, timestamp, statusCode).send({from: oracles[a].address}, (error, result) => 
         {         
-            console.log(`${JSON.stringify(oracles[a])}: Oracle Status code ${statusCode}`);         
+            console.log(`Submitted to oracle + ${JSON.stringify(oracles[a])}: Oracle Status code ${statusCode}`);         
         });
       }
     }  

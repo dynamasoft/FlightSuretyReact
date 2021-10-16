@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function AirlineOracle(props) {
   
-  const [flightNumber, setFlightNumber] = useState("1234");
+  const [flightNumber, setFlightNumber] = useState("ABC");
   
   return (
     <>

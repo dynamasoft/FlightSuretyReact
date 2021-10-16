@@ -9,7 +9,8 @@
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.5.1",
     "bignumber.js": "^9.0.1",
-    "solc-js": "^1.0.1"
+    "solc-js": "^1.0.1",
+    "truffle-plugin-debugger": "0.0.2"
   },
   "devDependencies": {
     "@openzeppelin/contracts": "^4.3.2",

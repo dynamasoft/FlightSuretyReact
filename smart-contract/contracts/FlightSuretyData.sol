@@ -151,7 +151,7 @@ contract FlightSuretyData {
     modifier requirePendingPaymentAmount(address passenger) {
         require(
             pendingPayments[passenger] > 0,
-            "Fund is not enought for withdrawal"
+            "Fund is not enough for withdrawal"
         );
         _;
     }
