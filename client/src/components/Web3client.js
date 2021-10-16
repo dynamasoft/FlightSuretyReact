@@ -225,9 +225,10 @@ export default class Contract {
   async pendingPaymentAmount(callback) {
     
     try {      
+      debugger;
       let self = this;
       var result = await self.flightSuretyApp.methods
-        .getPendingPaymentAmount(this.passengers[0]);
+        .getPendingPaymentAmount(this.passengers[0]).call();
         callback("Pending payment amount: " + result);
 
     } 
@@ -239,7 +240,7 @@ export default class Contract {
   async getPassengerBalance(callback) {    
     try {
       
-      var result = this.web3.eth.getBalance(this.passengers[0]);
+      var result = await this.web3.eth.getBalance(this.passengers[0]);
       callback("passenger 1 balance: " + result);
 
     } 
@@ -248,11 +249,12 @@ export default class Contract {
     }
   }  
   
-  async pay(callback) {    
+  async refund(callback) {    
     try {      
-      var result = this.web3.eth.pay({from: this.passengers[0], gasPrice: 0});
-      callback("passenger 1 balance: " + result);
-
+      debugger;
+      let self = this;
+      await self.flightSuretyApp.methods.refund()
+      .send(this.passengers[0]);
     } 
     catch (e) {      
       callback(e.message);

@@ -319,13 +319,6 @@ contract FlightSuretyApp {
         );
     }
 
-    /**
-     * @dev Transfers eligible payout funds to insuree
-     */
-    function pay() public requireIsOperational {
-        flightSuretyData.pay(msg.sender);
-    }
-
     // Generate a request for oracles to fetch flight information
     function fetchFlightStatus(
         address airline,
@@ -344,6 +337,16 @@ contract FlightSuretyApp {
         });
 
         emit OracleRequest(index, airline, flight, timestamp);
+    }
+
+    function getPendingPaymentAmount(address passenger) external returns (uint256) 
+    {
+        return flightSuretyData.getPendingPaymentAmount(passenger);
+    }  
+
+    function refund() requireIsOperational external
+    {
+        return flightSuretyData.refund(msg.sender);
     }
 
     /********************************************************************************************/
@@ -547,5 +550,6 @@ interface FlightSuretyData {
         address passenger        
     ) external view returns (bool);
 
-    function pay(address passenger) external;    
+    function refund(address passenger) external;    
+    function getPendingPaymentAmount(address passenger) external view returns (uint256);
 }

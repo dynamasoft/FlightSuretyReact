@@ -41,6 +41,7 @@ contract("Oracles", async (accounts) => {
   };
 
   let airline5 = accounts[5];
+  var passenger1 = accounts[10];
 
   var config;
   
@@ -105,5 +106,13 @@ contract("Oracles", async (accounts) => {
         }
       }
     });  
+
+    it("(front end) - get pending amount", async () => 
+    {
+      try {
+        var amount = await config.flightSuretyApp.getPendingAmount(passenger1);        
+      } catch (e) {}
+    });
+
   });
 });

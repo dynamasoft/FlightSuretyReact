@@ -94,6 +94,25 @@ const App = () => {
     });    
   }
 
+  const getPassengerBalance = () =>
+  {  
+    debugger;
+    contract.getPassengerBalance(response => {
+      debugger;
+      displayMessage(response);
+    });    
+  }
+
+  const refund = () =>
+  {
+  
+    debugger;
+    contract.refund(response => {
+      debugger;
+      displayMessage(response);
+    });    
+  }
+
 
 
   function displayMessage(msg) {
@@ -114,10 +133,10 @@ const App = () => {
         <button id="pendingPaymentAmountBtn" onClick={() => getPendingAmount() } > Check the amount to be Refund</button>
         <br />
         <h2>Passenger Balance</h2>
-        <button id="getPassengerBalanceBtn" >Get Passenger Balance</button>
+        <button id="getPassengerBalanceBtn" onClick={() => getPassengerBalance() } >Get Passenger Balance</button>
         <br />
         <h2>Purchase Insurance</h2>
-        <button id="withdrawPaymentBtn">Get Refund</button>
+        <button id="withdrawPaymentBtn" onClick={() => refund() } >Get Refund</button>
       </Grid>
       <Grid item xs={6}>
         <h2>LOGS</h2>

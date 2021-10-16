@@ -378,6 +378,13 @@ contract('Flight Surety Tests', async (accounts) => {
       result = await config.flightSuretyApp.isInsured.call(passenger2, flight2.airline, flight2.flight, flight2.timestamp);
       assert.equal(result, true, "Passenger can purchase insurance");
     });
+
+    it("(passenger) - get pending amount", async () => 
+    {
+      try {
+        var amount = await config.flightSuretyApp.getPendingAmount(passenger1);        
+      } catch (e) {}
+    });
   
   });
 });
