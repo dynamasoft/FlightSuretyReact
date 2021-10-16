@@ -359,12 +359,12 @@ contract FlightSuretyData {
      * @dev Buy insurance for a flight
      */
     function purchase(
-        bytes32 key,
+        bytes32 flightKey,
         address passenger,
         uint256 amount,
         uint256 multiplier
     ) external requireIsOperational requireIsContractAuthorized {
-        passengersInsurancePerFlight[key].push(
+        passengersInsurancePerFlight[flightKey].push(
             Insurance({
                 isCredited: false,
                 amount: amount,

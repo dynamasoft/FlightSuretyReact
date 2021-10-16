@@ -108,7 +108,11 @@ contract("Oracles", async (accounts) => {
             console.log(e);
           }
         }
+
       }
+
+
+      
     });  
 
     it("(front end) - get pending amount", async () => 

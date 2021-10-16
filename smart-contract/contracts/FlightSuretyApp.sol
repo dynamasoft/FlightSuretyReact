@@ -445,7 +445,7 @@ contract FlightSuretyApp {
         if (oracleResponses[key].responses[statusCode].length >= 1) 
         {
             emit FlightStatusInfo(airline, flight, timestamp, statusCode);
-            bytes32 flightKey = getFlightKey(msg.sender, flight, timestamp);                        
+            bytes32 flightKey = getFlightKey(airline, flight, timestamp);                        
             processFlightStatus(key,statusCode);
         }
     }
