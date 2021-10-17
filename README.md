@@ -40,5 +40,8 @@ To launch the project, please follow the steps below. Please keep in mind that t
 Here is the snippet. I hope this helps.
 ![image](https://user-images.githubusercontent.com/11653682/137629780-2622c797-3e0e-426c-a5bd-10e9a08a2ac8.png)
 
+![image](https://user-images.githubusercontent.com/11653682/137634455-183d4845-9e26-4993-afbe-4ffaae862d12.png)
+
+
 
 
