@@ -5,7 +5,7 @@ There are 3 main component to this projects.
 2. Server
 3. Client
 
-To launch the project, please follow the steps below:
+To launch the project, please follow the steps below. Please keep in mind that this project was built in Windows 10.
 
 1. Run `npm install` on each folder. I recommend open 3 seperate terminal so you can switch back and forth easily.
    Go to each following folders in the exact order and run the command
@@ -14,16 +14,19 @@ To launch the project, please follow the steps below:
    3. Client
 
 2. Build and run script on each folder
-   1. Go to Smart-Contract folder and run `truffle migrate --reset`
-   2. You will notice 2 abi json files appear in the client/src/config/.  I had to do this since react doesn't allow access to folder outside src.
+   1. Run your local ganache. Make sure to set 100 accounts with 1000 ether on each account. 
+   2. Edit truffle-config and set this const mnemonic = your own mnemonic from ganache.
+   3. Copy the mnemonic and paste it to your the truffle-config file 
+   4. Go to Smart-Contract folder and run `truffle migrate --reset`
+   5. You will notice 2 abi json files appear in the client/src/config/.  I had to do this since react doesn't allow access to folder outside src.
 
 ![image](https://user-images.githubusercontent.com/11653682/137628609-e4398564-4102-41d3-9c7b-5cade29bb926.png)
 
-   3. Go to Server folder and run `npm start`. This will kick off some oracle code initialization.
+   4. Go to Server folder and run `npm start`. This will kick off some oracle code initialization.
 ![image](https://user-images.githubusercontent.com/11653682/137629394-01d90b66-a9c2-43bb-8dc5-06c949a2a3bc.png)
 
 
-   3. Go to Client folder and run `npm start`. This will kick off the react server to run the client website. You can start interact with the smart contract.
+   5. Go to Client folder and run `npm start`. This will kick off the react server to run the client website. You can start interact with the smart contract.
 ![image](https://user-images.githubusercontent.com/11653682/137629511-39091800-fbce-479d-82aa-2950db48f63b.png)
 
    
