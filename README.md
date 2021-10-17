@@ -23,11 +23,19 @@ To launch the project, please follow the steps below:
 ![image](https://user-images.githubusercontent.com/11653682/137629394-01d90b66-a9c2-43bb-8dc5-06c949a2a3bc.png)
 
 
-   3. Go to Client folder and run `npm start`. This will kick off the react server to run the client website.
+   3. Go to Client folder and run `npm start`. This will kick off the react server to run the client website. You can start interact with the smart contract.
 ![image](https://user-images.githubusercontent.com/11653682/137629511-39091800-fbce-479d-82aa-2950db48f63b.png)
 
    
 
+3. Test Smart Contract.
+    1. Go to smart-contract folder and run 'Truffle Test'
+    2. There are two different test and they will run one after another.
+       1. FlightSurety Test
+       2. Oracle Test
+
+Here is the snippet. I hope this helps.
+![image](https://user-images.githubusercontent.com/11653682/137629780-2622c797-3e0e-426c-a5bd-10e9a08a2ac8.png)
 
 
 
